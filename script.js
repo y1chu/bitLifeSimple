@@ -1,51 +1,301 @@
 const events = [
     {
-        description: "You found a wallet on the street. What will you do?",
+        description: "You come across a street performer. What will you do?",
         choices: [
-            { text: "Return it to the owner.", happiness: 10, health: 0, wealth: -10 },
-            { text: "Keep the money.", happiness: -5, health: 0, wealth: 20 },
-        ],
+            {
+                text: "Watch the performance.",
+                outcomes: [
+                    {happiness: 10, health: 5, wealth: -5, description: "You enjoy the performance and feel inspired."},
+                    {
+                        happiness: 5,
+                        health: 10,
+                        wealth: -10,
+                        description: "You get caught up in the excitement and accidentally break something, costing you money."
+                    },
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: 0,
+                        description: "You find the performance boring and leave early."
+                    }
+                ]
+            },
+            {
+                text: "Ignore the performer and keep walking.",
+                outcomes: [
+                    {happiness: -5, health: 0, wealth: 0, description: "You feel guilty for not supporting the arts."},
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: 0,
+                        description: "You don't think twice about it and keep walking."
+                    }
+                ]
+            }
+        ]
     },
-    // Add more events here
     {
-        description: "You are feeling stressed. What will you do?",
+        description: "You have a chance to invest in a new startup. What will you do?",
         choices: [
-            { text: "Go for a walk in nature.", happiness: 10, health: 5, wealth: 0 },
-            { text: "Play video games all night.", happiness: 5, health: -5, wealth: 0 },
-        ],
+            {
+                text: "Invest all your savings.",
+                outcomes: [
+                    {
+                        happiness: 10,
+                        health: 0,
+                        wealth: 50,
+                        description: "Your investment pays off big time and you become wealthy."
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: -50,
+                        description: "The startup fails and you lose all your money."
+                    },
+                    {
+                        happiness: 5,
+                        health: 0,
+                        wealth: 0,
+                        description: "The startup breaks even and you get your money back."
+                    }
+                ]
+            },
+            {
+                text: "Don't invest anything.",
+                outcomes: [
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: 0,
+                        description: "You don't make any money, but you also don't lose any money."
+                    },
+                    {
+                        happiness: 5,
+                        health: 0,
+                        wealth: 10,
+                        description: "You find a better investment opportunity later and make a small profit."
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: -10,
+                        description: "You regret not taking the chance when you had it."
+                    }
+                ]
+            }
+        ]
     },
     {
-        description: "A friend invites you to join a gym membership. What will you do?",
+        description: "You are offered a promotion at work, but it requires longer hours and more stress. What will you do?",
         choices: [
-            { text: "Sign up and commit to a healthier lifestyle.", happiness: 5, health: 10, wealth: -20 },
-            { text: "Decline the offer and stay at home.", happiness: 0, health: -5, wealth: 0 },
-        ],
+            {
+                text: "Take the promotion.",
+                outcomes: [
+                    {
+                        happiness: 10,
+                        health: -5,
+                        wealth: 20,
+                        description: "You succeed in your new position and earn a higher salary."
+                    },
+                    {
+                        happiness: -5,
+                        health: -10,
+                        wealth: 10,
+                        description: "The added stress causes health problems, but you still make more money."
+                    },
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: 0,
+                        description: "You realize the job isn't for you and quit after a few months."
+                    }
+                ]
+            },
+            {
+                text: "Decline the promotion.",
+                outcomes: [
+                    {
+                        happiness: 5,
+                        health: 0,
+                        wealth: 0,
+                        description: "You are content with your current job and continue to enjoy it."
+                    },
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: 0,
+                        description: "You regret not taking the opportunity, but ultimately you are happy with your decision."
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: -10,
+                        description: "You are passed over for a promotion later and lose out on a raise."
+                    }
+                ]
+            }
+        ]
     },
     {
-        description: "You've been offered a high-paying job with longer hours. What will you do?",
+        description: "You get invited to a party. What do you do?",
         choices: [
-            { text: "Take the job for the higher salary.", happiness: -5, health: -10, wealth: 30 },
-            { text: "Stay in your current job for a better work-life balance.", happiness: 5, health: 5, wealth: 0 },
-        ],
-    },
-    {
-        description: "You're feeling unwell. What will you do?",
-        choices: [
-            { text: "Visit the doctor and get treated.", happiness: 0, health: 10, wealth: -10 },
-            { text: "Ignore it and hope it goes away.", happiness: -5, health: -10, wealth: 0 },
-        ],
-    },
-    {
-        description: "Your friend is starting a business and asks for your investment. What will you do?",
-        choices: [
-            { text: "Invest in the business and hope for the best.", happiness: 0, health: 0, wealth: -20 },
-            { text: "Politely decline and keep your savings.", happiness: 0, health: 0, wealth: 0 },
-        ],
+            {
+                text: "Go to the party.",
+                outcomes: [
+                    { happiness: 20, health: -5, wealth: -10, description: "You have a great time at the party, but wake up the next day feeling tired and with less money in your pocket." },
+                    { happiness: -5, health: -10, wealth: 0, description: "You get sick at the party and spend the whole night in the bathroom. You don't spend any money, but you feel terrible." },
+                    { happiness: 5, health: 5, wealth: -5, description: "You have an average time at the party. You spend a little money, but don't regret going." }
+                ]
+            },
+            {
+                text: "Stay home.",
+                outcomes: [
+                    { happiness: -10, health: 0, wealth: 0, description: "You spend a boring night at home and regret not going to the party." },
+                    { happiness: 5, health: 10, wealth: 0, description: "You spend a quiet night at home and feel refreshed the next day." }
+                ]
+            }
+        ]
     },
 
+    {
+        description: "You have an opportunity to travel to a new city. What will you do?",
+        choices: [
+            {
+                text: "Book the trip and go.",
+                outcomes: [
+                    { happiness: 20, health: 10, wealth: -30, description: "You have an amazing time exploring the new city and making memories." },
+                    { happiness: -10, health: -5, wealth: -50, description: "The trip turns out to be a disaster and you regret spending so much money on it." },
+                    { happiness: 10, health: -5, wealth: -20, description: "You have a good time in the new city, but wish you had spent less money." }
+                ]
+            },
+            {
+                text: "Stay home.",
+                outcomes: [
+                    { happiness: -5, health: 0, wealth: 0, description: "You regret not taking the opportunity to travel and feel bored at home." },
+                    { happiness: 5, health: 5, wealth: 0, description: "You have a relaxing time at home and catch up on some much needed rest." }
+                ]
+            }
+        ]
+    },
+
+    {
+        description: "You come across a lost puppy. What will you do?",
+        choices: [
+            {
+                text: "Adopt the puppy.",
+                outcomes: [
+                    { happiness: 10, health: 5, wealth: -5, description: "You adopt the puppy and it brings you joy and companionship." },
+                    { happiness: -5, health: -5, wealth: -10, description: "You adopt the puppy, but soon realize that you can't afford to take care of it properly." },
+                    { happiness: 0, health: 0, wealth: 0, description: "You think about adopting the puppy, but decide against it." }
+                ]
+            },
+            {
+                text: "Ignore the puppy and keep walking.",
+                outcomes: [
+                    { happiness: -5, health: 0, wealth: 0, description: "You feel guilty for not helping the puppy." },
+                    { happiness: 0, health: 0, wealth: 0, description: "You don't think twice about it and keep walking." }
+                ]
+            }
+        ]
+    },
+
+    {
+        description: "You come across a booth selling anime merchandise. What will you do?",
+        choices: [
+            {
+                text: "Buy a limited edition figure.",
+                outcomes: [
+                    {
+                        happiness: 10,
+                        health: 0,
+                        wealth: -20,
+                        description: "You get the figure you've been wanting for a long time, but it puts a dent in your wallet."
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: -10,
+                        description: "You get the figure you've been wanting for a long time, but it turns out to be a bootleg and falls apart shortly after."
+                    },
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: -10,
+                        description: "You decide not to buy the figure and save your money for something else."
+                    }
+                ]
+            },
+            {
+                text: "Buy a cosplay costume.",
+                outcomes: [
+                    {
+                        happiness: 15,
+                        health: 0,
+                        wealth: -20,
+                        description: "You find the perfect cosplay costume and feel proud to show it off at the next convention."
+                    },
+                    {
+                        happiness: -10,
+                        health: 0,
+                        wealth: -20,
+                        description: "The costume doesn't fit right and you end up feeling uncomfortable wearing it all day at the convention."
+                    },
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: -20,
+                        description: "You decide not to buy the cosplay costume and save your money for something else."
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        description: "You encounter a group of players looking for more members for their dungeon run. What will you do?",
+        choices: [
+            {
+                text: "Join their party.",
+                outcomes: [
+                    { happiness: 15, health: 10, wealth: 0, description: "You have a successful run and make new friends along the way." },
+                    { happiness: -5, health: -5, wealth: 0, description: "The run is a disaster and you end up wasting time and resources." },
+                    { happiness: 5, health: 0, wealth: 0, description: "The run is average and you gain some experience, but nothing special happens." }
+                ]
+            },
+            {
+                text: "Decline the invitation.",
+                outcomes: [
+                    { happiness: 0, health: 0, wealth: 0, description: "You miss out on the opportunity to run the dungeon, but have more time to yourself." },
+                    { happiness: 5, health: 0, wealth: 0, description: "You use the time to do other things and feel productive." },
+                    { happiness: -5, health: 0, wealth: 0, description: "You regret declining and wish you had joined the party." }
+                ]
+            }
+        ]
+    },
+
+    {
+        description: "You come across a stray cat. What will you do?",
+        choices: [
+            {
+                text: "Pet the cat.",
+                outcomes: [
+                    {happiness: 5, health: 0, wealth: 0, description: "The cat is friendly and enjoys your company. You feel happy for making a new friend." },
+                    {happiness: 0, health: 0, wealth: 0, description: "The cat doesn't seem interested in your affection and walks away. You feel a little disappointed." }
+                ]
+            },
+            {
+                text: "Ignore the cat and keep walking.",
+                outcomes: [
+                    {happiness: 0, health: 0, wealth: 0, description: "You don't think twice about it and keep walking." },
+                    {happiness: -5, health: 0, wealth: 0, description: "You feel a little guilty for not acknowledging the cat, but decide to keep moving." }
+                ]
+            }
+        ]
+    }
 
 
 ];
+
 
 let currentEventIndex;
 let happiness = 50;
@@ -115,15 +365,19 @@ function displayCurrentEvent() {
 }
 
 function makeChoice(choiceIndex) {
-    const choice = events[currentEventIndex].choices[choiceIndex];
-    happiness = clampAttribute(happiness + choice.happiness);
-    health = clampAttribute(health + choice.health);
-    wealth = clampAttribute(wealth + choice.wealth);
+    const event = events[currentEventIndex];
+    const choice = event.choices[choiceIndex];
+    const outcome = choice.outcomes[Math.floor(Math.random() * choice.outcomes.length)];
+
+    happiness = clampAttribute(happiness + outcome.happiness);
+    health = clampAttribute(health + outcome.health);
+    wealth = clampAttribute(wealth + outcome.wealth);
 
     updateStatsDisplay();
 
-    if (checkForDeath()) {
-        alert("Unfortunately, you didn't make it. Game over.");
+    const causeOfDeath = checkForDeath();
+    if (causeOfDeath) {
+        alert(`You died from ${causeOfDeath}.`);
         // Reset the game state
         happiness = 50;
         health = 50;
@@ -133,10 +387,30 @@ function makeChoice(choiceIndex) {
         // Show the character creation screen
         showCharacterCreationScreen();
     } else {
+        addLog(`${outcome.description} You gained ${outcome.happiness} happiness, ${outcome.health} health, and ${outcome.wealth} wealth.`);
         pickRandomEvent();
     }
 }
 
+
+
+
+let logCounter = 0;
+
+function addLog(logMessage) {
+    const log = document.getElementById("log");
+
+    // Check if the log needs to be cleared
+    if (logCounter >= 5) {
+        log.innerHTML = "";
+        logCounter = 0;
+    }
+
+    const logElement = document.createElement("p");
+    logElement.innerText = logMessage;
+    log.appendChild(logElement);
+    logCounter++;
+}
 
 
 function updateStatsDisplay() {
@@ -150,15 +424,29 @@ function updateStatsDisplay() {
     wealthDisplay.innerText = wealth;
 }
 
+const happinessDeathCauses = ["Depression", "Loneliness", "Lack of fulfillment"];
+const healthDeathCauses = ["Disease", "Accident", "Poor lifestyle choices"];
+const wealthDeathCauses = ["Bankruptcy", "Debt", "Financial ruin"];
+
 function checkForDeath() {
-    if (happiness <= 0 || health <= 0 || wealth <= 0) {
+    let deathCause;
+    if (happiness <= 0) {
+        deathCause = happinessDeathCauses[Math.floor(Math.random() * happinessDeathCauses.length)];
+    } else if (health <= 0) {
+        deathCause = healthDeathCauses[Math.floor(Math.random() * healthDeathCauses.length)];
+    } else if (wealth <= 0) {
+        deathCause = wealthDeathCauses[Math.floor(Math.random() * wealthDeathCauses.length)];
+    }
+    if (deathCause) {
         const deathChance = Math.random();
         if (deathChance <= 0.5) {
-            return true;
+            return deathCause;
         }
     }
     return false;
 }
+
+
 
 function showCharacterCreationScreen() {
     // Hide the game elements
@@ -191,6 +479,14 @@ function displayPlayerName(firstName, lastName) {
 
 function clampAttribute(value) {
     return Math.min(Math.max(value, 0), 100);
+}
+
+function updateLog(outcome) {
+    const log = document.getElementById('log');
+    const message = `${outcome.description}`;
+    const logElement = document.createElement("p");
+    logElement.innerText = message;
+    log.appendChild(logElement);
 }
 
 
