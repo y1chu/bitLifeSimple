@@ -252,7 +252,7 @@ const events = [
     },
 
     {
-        description: "You encounter a group of players looking for more members for their dungeon run. What will you do?",
+        description: "While playing FF14, you encounter a group of players looking for more members for their dungeon run. What will you do?",
         choices: [
             {
                 text: "Join their party.",
@@ -382,6 +382,8 @@ function makeChoice(choiceIndex) {
         happiness = 50;
         health = 50;
         wealth = 50;
+        currentYear = 0;
+        currentMonth = 1;
         updateStatsDisplay();
 
         // Show the character creation screen
@@ -392,10 +394,24 @@ function makeChoice(choiceIndex) {
     }
 }
 
-
-
-
 let logCounter = 0;
+let currentMonth = 1;
+let currentYear = 0;
+
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
 
 function addLog(logMessage) {
     const log = document.getElementById("log");
@@ -407,11 +423,24 @@ function addLog(logMessage) {
     }
 
     const logElement = document.createElement("p");
-    logElement.innerText = logMessage;
+    const date = document.createElement("span");
+
+    if (currentMonth > 12) {
+        currentYear++;
+        currentMonth = 1;
+    }
+
+    date.innerText = `Year ${currentYear}, ${months[currentMonth - 1]} | `;
+    date.style.fontWeight = "bold";
+    date.style.marginRight = "10px";
+
+    logElement.appendChild(date);
+    logElement.innerText += logMessage;
+
     log.appendChild(logElement);
     logCounter++;
+    currentMonth++;
 }
-
 
 function updateStatsDisplay() {
     const happinessDisplay = document.getElementById("happiness");
@@ -446,8 +475,6 @@ function checkForDeath() {
     return false;
 }
 
-
-
 function showCharacterCreationScreen() {
     // Hide the game elements
     document.querySelector("h1").style.display = "none";
@@ -469,8 +496,18 @@ function showCharacterCreationScreen() {
     document.getElementById("last-name").style.display = "inline";
     document.getElementById("gender").style.display = "inline";
     document.querySelector("button").style.display = "inline";
-}
 
+    // Reset the game state
+    happiness = 50;
+    health = 50;
+    wealth = 50;
+    currentEventIndex = 0;
+    currentYear = 0;
+    currentMonth = 1;
+    logCounter = 0;
+    const log = document.getElementById("log");
+    log.innerHTML = "";
+}
 
 function displayPlayerName(firstName, lastName) {
     const playerNameElement = document.getElementById("player-name");
@@ -481,12 +518,5 @@ function clampAttribute(value) {
     return Math.min(Math.max(value, 0), 100);
 }
 
-function updateLog(outcome) {
-    const log = document.getElementById('log');
-    const message = `${outcome.description}`;
-    const logElement = document.createElement("p");
-    logElement.innerText = message;
-    log.appendChild(logElement);
-}
 
 
