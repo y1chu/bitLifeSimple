@@ -79,7 +79,7 @@ const events = [
                     {
                         happiness: -5,
                         health: 0,
-                        wealth: -10,
+                        wealth: 0,
                         description: "You regret not taking the chance when you had it."
                     }
                 ]
