@@ -1,4 +1,5 @@
 const events = [
+
     {
         description: "You come across a street performer. What will you do?",
         choices: [
@@ -291,6 +292,194 @@ const events = [
                 ]
             }
         ]
+    },
+
+    {
+        description: "While walking in the park, you meet someone sitting alone on a bench. What will you do?",
+        choices: [
+            {
+                text: "Approach and strike up a conversation.",
+                outcomes: [
+                    {
+                        happiness: 10,
+                        health: 5,
+                        wealth: 0,
+                        friend: { name: "Alex", description: "A friendly and interesting person. You hit it off and exchange contact information.", avatar: "alex.jpg" },
+                        description: "You have a great conversation and make a new friend."
+                    },
+                    {
+                        happiness: 5,
+                        health: 5,
+                        wealth: 0,
+                        description: "You have a nice chat, but ultimately don't exchange contact information.",
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: 0,
+                        description: "The conversation is awkward and you both feel uncomfortable.",
+                    }
+                ]
+            },
+            {
+                text: "Ignore them and keep walking.",
+                outcomes: [
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: 0,
+                        description: "You feel a little guilty for not reaching out to someone who seemed lonely."
+                    },
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: 0,
+                        description: "You continue on with your walk without giving it a second thought."
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        description: "While playing FF14, you come across a player who is incredibly skilled at the game. What will you do?",
+        choices: [
+            {
+                text: "Send a message complimenting their skills and ask for tips.",
+                outcomes: [
+                    {
+                        happiness: 10,
+                        health: 0,
+                        wealth: 0,
+                        friend: { name: "Kenji", description: "An expert FF14 player who is eager to share their knowledge."},
+                        description: "Kenji is happy to hear your kind words and shares valuable tips to improve your gameplay. You become friends."
+                    },
+                    {
+                        happiness: 5,
+                        health: 0,
+                        wealth: 0,
+                        description: "They appreciates the compliment and shares some tips but does not seem interested in becoming friends.",
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: 0,
+                        description: "They seems to be annoyed by your message and does not respond well.",
+                    }
+                ]
+            },
+            {
+                text: "Keep playing the game without interacting with them.",
+                outcomes: [
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: 0,
+                        description: "You continue playing the game, enjoying the experience without interacting with them."
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: 0,
+                        description: "You feel a bit disappointed for not reaching out to them, missing an opportunity to learn from a skilled player."
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        description: "You join a cooking class and meet a talented chef. What will you do?",
+        choices: [
+            {
+                text: "Ask the chef for some cooking tips.",
+                outcomes: [
+                    {
+                        happiness: 10,
+                        health: 5,
+                        wealth: 0,
+                        friend: { name: "Maria", description: "A talented chef who loves sharing her culinary knowledge."},
+                        description: "You learn valuable cooking tips and make a new friend."
+                    },
+                    {
+                        happiness: 5,
+                        health: 5,
+                        wealth: 0,
+                        description: "You receive useful cooking tips, but don't become friends.",
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: 0,
+                        description: "The chef seems too busy to help you, leaving you disappointed.",
+                    }
+                ]
+            },
+            {
+                text: "Just observe and try to learn on your own.",
+                outcomes: [
+                    {
+                        happiness: 0,
+                        health: 5,
+                        wealth: 0,
+                        description: "You learn a few things, but don't make any connections."
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: 0,
+                        description: "You struggle to follow the class, feeling a bit overwhelmed."
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        description: "You attend a local book club meeting and sit next to someone with a captivating perspective on the book. What will you do?",
+        choices: [
+            {
+                text: "Engage in a deep discussion about the book.",
+                outcomes: [
+                    {
+                        happiness: 10,
+                        health: 0,
+                        wealth: 0,
+                        friend: { name: "Oliver", description: "A thoughtful and intellectual person with a love for literature."},
+                        description: "You have an engaging conversation and make a new friend."
+                    },
+                    {
+                        happiness: 5,
+                        health: 0,
+                        wealth: 0,
+                        description: "You enjoy the discussion, but don't form a lasting connection.",
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: 0,
+                        description: "The conversation takes a negative turn, leaving you feeling disheartened.",
+                    }
+                ]
+            },
+            {
+                text: "Listen quietly and avoid drawing attention.",
+                outcomes: [
+                    {
+                        happiness: 0,
+                        health: 0,
+                        wealth: 0,
+                        description: "You learn from the discussion, but don't make any new friends."
+                    },
+                    {
+                        happiness: -5,
+                        health: 0,
+                        wealth: 0,
+                        description: "You feel left out of the conversation and regret not participating."
+                    }
+                ]
+            }
+        ]
     }
 
 
@@ -348,7 +537,6 @@ function startGame() {
     document.getElementById("last-name").style.display = "none";
     document.getElementById("gender").style.display = "none";
     document.querySelector("button").style.display = "none";
-
     pickRandomEvent();
     updateStatsDisplay();
 }
@@ -364,10 +552,21 @@ function displayCurrentEvent() {
     choice2Button.innerText = events[currentEventIndex].choices[1].text;
 }
 
+let friends = [];
+
 function makeChoice(choiceIndex) {
     const event = events[currentEventIndex];
     const choice = event.choices[choiceIndex];
     const outcome = choice.outcomes[Math.floor(Math.random() * choice.outcomes.length)];
+
+    if (outcome.friend) {
+        const confirmAdd = confirm(`You met ${outcome.friend.name}. Do you want to add them to your friend list?`);
+        if (confirmAdd) {
+            friends.push(outcome.friend);
+            addLog(`${outcome.friend.name} has been added to your friend list!`);
+            updateFriendsList(); // Update the friends list
+        }
+    }
 
     happiness = clampAttribute(happiness + outcome.happiness);
     health = clampAttribute(health + outcome.health);
@@ -382,9 +581,8 @@ function makeChoice(choiceIndex) {
         happiness = 50;
         health = 50;
         wealth = 50;
-        currentYear = 0;
-        currentMonth = 1;
         updateStatsDisplay();
+        friends = []; // Clear the friend list
 
         // Show the character creation screen
         showCharacterCreationScreen();
@@ -393,6 +591,7 @@ function makeChoice(choiceIndex) {
         pickRandomEvent();
     }
 }
+
 
 let logCounter = 0;
 let currentMonth = 1;
@@ -475,12 +674,14 @@ function checkForDeath() {
     return false;
 }
 
+
 function showCharacterCreationScreen() {
     // Hide the game elements
     document.querySelector("h1").style.display = "none";
     document.getElementById("event-description").style.display = "none";
     document.getElementById("choice1").style.display = "none";
     document.getElementById("choice2").style.display = "none";
+    document.getElementById("friends-list").style.display = "none";
     document.querySelectorAll("p").forEach((element) => {
         element.style.display = "none";
     });
@@ -518,5 +719,15 @@ function clampAttribute(value) {
     return Math.min(Math.max(value, 0), 100);
 }
 
+function updateFriendsList() {
+    const friendsListElement = document.getElementById("friends-list-items");
+    friendsListElement.innerHTML = ""; // Clear the list before updating
+
+    for (const friend of friends) {
+        const friendElement = document.createElement("li");
+        friendElement.innerText = `${friend.name} - ${friend.description}`;
+        friendsListElement.appendChild(friendElement);
+    }
+}
 
 

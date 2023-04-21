@@ -1,0 +1,8 @@
+"description: You come across a street performer. What will you do?",
+"choice1: Watch the performance.",
+"outcome1: happiness:10, health:5, wealth:-5, description:You enjoy the performance and feel inspired.",
+"outcome2: happiness:5, health:10, wealth:-10, description:You get caught up in the excitement and accidentally break something, costing you money.",
+"outcome3: happiness:0, health:0, wealth:0, description:You find the performance boring and leave early.",
+"choice2: Ignore the performer and keep walking.",
+"outcome4: happiness:-5, health:0, wealth:0, description:You feel guilty for not supporting the arts.",
+"outcome5: happiness:0, health:0, wealth:0, description:You don't think twice about it and keep walking."
