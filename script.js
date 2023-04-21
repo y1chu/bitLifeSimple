@@ -386,101 +386,9 @@ const events = [
                 ]
             }
         ]
-    },
-
-    {
-        description: "You join a cooking class and meet a talented chef. What will you do?",
-        choices: [
-            {
-                text: "Ask the chef for some cooking tips.",
-                outcomes: [
-                    {
-                        happiness: 10,
-                        health: 5,
-                        wealth: 0,
-                        friend: { name: "Maria", description: "A talented chef who loves sharing her culinary knowledge."},
-                        description: "You learn valuable cooking tips and make a new friend."
-                    },
-                    {
-                        happiness: 5,
-                        health: 5,
-                        wealth: 0,
-                        description: "You receive useful cooking tips, but don't become friends.",
-                    },
-                    {
-                        happiness: -5,
-                        health: 0,
-                        wealth: 0,
-                        description: "The chef seems too busy to help you, leaving you disappointed.",
-                    }
-                ]
-            },
-            {
-                text: "Just observe and try to learn on your own.",
-                outcomes: [
-                    {
-                        happiness: 0,
-                        health: 5,
-                        wealth: 0,
-                        description: "You learn a few things, but don't make any connections."
-                    },
-                    {
-                        happiness: -5,
-                        health: 0,
-                        wealth: 0,
-                        description: "You struggle to follow the class, feeling a bit overwhelmed."
-                    }
-                ]
-            }
-        ]
-    },
-
-    {
-        description: "You attend a local book club meeting and sit next to someone with a captivating perspective on the book. What will you do?",
-        choices: [
-            {
-                text: "Engage in a deep discussion about the book.",
-                outcomes: [
-                    {
-                        happiness: 10,
-                        health: 0,
-                        wealth: 0,
-                        friend: { name: "Oliver", description: "A thoughtful and intellectual person with a love for literature."},
-                        description: "You have an engaging conversation and make a new friend."
-                    },
-                    {
-                        happiness: 5,
-                        health: 0,
-                        wealth: 0,
-                        description: "You enjoy the discussion, but don't form a lasting connection.",
-                    },
-                    {
-                        happiness: -5,
-                        health: 0,
-                        wealth: 0,
-                        description: "The conversation takes a negative turn, leaving you feeling disheartened.",
-                    }
-                ]
-            },
-            {
-                text: "Listen quietly and avoid drawing attention.",
-                outcomes: [
-                    {
-                        happiness: 0,
-                        health: 0,
-                        wealth: 0,
-                        description: "You learn from the discussion, but don't make any new friends."
-                    },
-                    {
-                        happiness: -5,
-                        health: 0,
-                        wealth: 0,
-                        description: "You feel left out of the conversation and regret not participating."
-                    }
-                ]
-            }
-        ]
     }
+
+
 
 
 ];
@@ -574,9 +482,8 @@ function makeChoice(choiceIndex) {
 
     updateStatsDisplay();
 
-    const causeOfDeath = checkForDeath();
-    if (causeOfDeath) {
-        alert(`You died from ${causeOfDeath}.`);
+    if (checkForDeath()) {
+        alert("Unfortunately, you didn't make it. Game over.");
         // Reset the game state
         happiness = 50;
         health = 50;
@@ -673,7 +580,6 @@ function checkForDeath() {
     }
     return false;
 }
-
 
 function showCharacterCreationScreen() {
     // Hide the game elements
