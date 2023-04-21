@@ -483,7 +483,6 @@ function makeChoice(choiceIndex) {
     updateStatsDisplay();
 
     const causeOfDeath = checkForDeath();
-    let deathCause;
     if (causeOfDeath) {
         alert(`You died from ${causeOfDeath}.`);
         // Reset the game state
@@ -492,6 +491,7 @@ function makeChoice(choiceIndex) {
         wealth = 50;
         updateStatsDisplay();
         friends = []; // Clear the friend list
+        updateFriendsList()
 
         // Show the character creation screen
         showCharacterCreationScreen();
@@ -589,7 +589,6 @@ function showCharacterCreationScreen() {
     document.getElementById("event-description").style.display = "none";
     document.getElementById("choice1").style.display = "none";
     document.getElementById("choice2").style.display = "none";
-    document.getElementById("friends-list").style.display = "none";
     document.querySelectorAll("p").forEach((element) => {
         element.style.display = "none";
     });
