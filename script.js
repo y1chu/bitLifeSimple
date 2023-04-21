@@ -482,8 +482,10 @@ function makeChoice(choiceIndex) {
 
     updateStatsDisplay();
 
-    if (checkForDeath()) {
-        alert("Unfortunately, you didn't make it. Game over.");
+    const causeOfDeath = checkForDeath();
+    let deathCause;
+    if (causeOfDeath) {
+        alert(`You died from ${causeOfDeath}.`);
         // Reset the game state
         happiness = 50;
         health = 50;
