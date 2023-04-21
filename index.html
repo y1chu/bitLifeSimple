@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Simulation Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="initializeGame()">
+<label for="first-name">First Name:</label>
+<input type="text" id="first-name" required>
+<br>
+<label for="last-name">Last Name:</label>
+<input type="text" id="last-name" required>
+<br>
+<label for="gender">Gender:</label>
+<select id="gender" required>
+    <option value="">Select gender</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="other">Other</option>
+</select>
+<br>
+<button onclick="startGame()">Start Game</button>
+<hr>
+<h1>Life Simulation Game</h1>
+<h2 id="player-name"></h2>
+<p id="event-description">Loading...</p>
+<button id="choice1" onclick="makeChoice(0)">Choice 1</button>
+<button id="choice2" onclick="makeChoice(1)">Choice 2</button>
+<br><br>
+<p>Happiness: <span id="happiness">0</span></p>
+<p>Health: <span id="health">0</span></p>
+<p>Wealth: <span id="wealth">0</span></p>
+<script src="script.js"></script>
+</body>
+</html>
