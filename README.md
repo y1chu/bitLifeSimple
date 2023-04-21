@@ -4,7 +4,7 @@ This is a text-based game where you make choices and try to navigate through lif
 
 ## Getting Started
 
-To play the game, simply visite this link: https://y1chu.github.io/bitLifeSimple/
+To play the game, simply visit this link: https://y1chu.github.io/bitLifeSimple/
 ## How to Play
 
 At each event, you will be presented with a choice. Read the description and choose the option that you think is best. Each choice has different outcomes, which can affect your attributes in different ways.
