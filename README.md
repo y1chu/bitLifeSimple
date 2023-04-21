@@ -2,6 +2,8 @@
 
 This is a text-based game where you make choices and try to navigate through life. You start with three attributes: happiness, health, and wealth. As you progress through the game, your choices will affect these attributes, and you may gain or lose points in each category.
 
+Note that this is still an on-going project. I will add more things when I have time. :)
+
 ## Getting Started
 
 To play the game, simply visit this link: https://y1chu.github.io/bitLifeSimple/
